@@ -1,0 +1,727 @@
+# UI Kit
+
+Documentación completa de componentes, estilos y sistema de diseño de la aplicación Netflix-like.
+
+---
+
+## Tabla de Contenidos
+
+- [Sistema de Colores](#sistema-de-colores)
+- [Temas](#temas)
+- [Tipografía](#tipografía)
+- [Componentes shadcn/ui](#componentes-shadcnui)
+- [Componentes Custom](#componentes-custom)
+- [Estados de Carga](#estados-de-carga)
+- [Dropdowns Modernos](#dropdowns-modernos)
+- [Filtros Comunes](#filtros-comunes)
+- [Paginación](#paginacion)
+- [Espaciado](#espaciado)
+- [Responsividad](#responsividad)
+
+---
+
+## Sistema de Colores
+
+### Colores Primarios (Netflix-like)
+
+| Variable CSS | Valor (Tema Oscuro) | Valor (Tema Claro) | Uso |
+|---------------|----------------------|---------------------|-----|
+| `--netflix-red` | `#E50914` | `#E50914` | Botones principales, acentos, highlights |
+| `--netflix-black` | `#141414` | - | Background principal (tema oscuro) |
+| `--netflix-dark` | `#181818` | - | Cards, headers (tema oscuro) |
+| `--netflix-gray` | `#2F2F2F` | - | Bordes, elementos secundarios (tema oscuro) |
+
+### Variables CSS por Tema
+
+#### Tema Oscuro (Default - Netflix-like)
+```css
+--background: #141414;
+--foreground: #FFFFFF;
+--card: #181818;
+--card-foreground: #FFFFFF;
+--primary: #E50914;
+--primary-foreground: #FFFFFF;
+--muted: #2F2F2F;
+--muted-foreground: #B3B3B3;
+--border: #404040;
+--input: #2F2F2F;
+--ring: #E50914;
+```
+
+#### Tema Claro
+```css
+--background: #FFFFFF;
+--foreground: #141414;
+--card: #F5F5F5;
+--card-foreground: #141414;
+--primary: #E50914;
+--primary-foreground: #FFFFFF;
+--muted: #E5E5E5;
+--muted-foreground: #666666;
+--border: #D1D1D1;
+--input: #E5E5E5;
+--ring: #E50914;
+```
+
+---
+
+## Temas
+
+### Tema Oscuro (Default)
+- **Background:** `#141414` (negro Netflix)
+- **Card Background:** `#181818`
+- **Text:** `#FFFFFF` (blanco)
+- **Accent:** `#E50914` (rojo Netflix)
+- **Muted Text:** `#B3B3B3` (gris claro)
+- **Border:** `#404040` (gris medio)
+
+### Tema Claro
+- **Background:** `#FFFFFF` (blanco)
+- **Card Background:** `#F5F5F5` (gris muy claro)
+- **Text:** `#141414` (casi negro)
+- **Accent:** `#E50914` (rojo Netflix - mismo en ambos temas)
+- **Muted Text:** `#666666` (gris medio)
+- **Border:** `#D1D1D1` (gris claro)
+
+### Toggle de Tema
+- **Ubicación:** Header (esquina superior derecha)
+- **Icono:** Sol (tema claro) / Luna (tema oscuro)
+- **Animación:** Smooth transition (300ms)
+- **Persistencia:** localStorage
+
+---
+
+## Tipografía
+
+### Fuente Principal
+- **Nombre:** Inter (o fuente system default)
+- **Pesos:** 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold)
+- **Escalas de Tamaño:**
+
+| Clase Tailwind | Tamaño | Uso |
+|-----------------|---------|-----|
+| `text-xs` | 12px | Labels pequeños, metadata |
+| `text-sm` | 14px | Descripciones cortas, tags |
+| `text-base` | 16px | Texto de cuerpo |
+| `text-lg` | 18px | Títulos de secciones |
+| `text-xl` | 20px | Subtítulos |
+| `text-2xl` | 24px | Títulos de cards |
+| `text-3xl` | 30px | Títulos destacados |
+| `text-4xl` | 36px | Hero titles |
+| `text-5xl` | 48px | Hero titles grandes |
+
+---
+
+## Componentes shadcn/ui
+
+### Lista de Componentes Instalados
+
+| Componente | Descripción | Variantes |
+|------------|-------------|-----------|
+| **Button** | Botón reutilizable | default, destructive, outline, ghost, link |
+| **Card** | Contenedor con header y contenido | default, outline |
+| **Input** | Campo de entrada de texto | default |
+| **Select** | Dropdown select | default |
+| **DropdownMenu** | Menú dropdown con opciones | - |
+| **Dialog** | Modal/Dialog overlay | - |
+| **ScrollArea** | Área con scroll personalizado | - |
+| **Skeleton** | Skeleton de carga | - |
+| **Separator** | Línea separadora | horizontal, vertical |
+| **Badge** | Badge/etiqueta | default, secondary, destructive, outline |
+| **Avatar** | Avatar con imagen o iniciales | - |
+| **DropdownMenuItem** | Item de menú dropdown | - |
+| **DropdownMenuTrigger** | Trigger del dropdown | - |
+| **DropdownMenuContent** | Contenido del dropdown | - |
+
+### Instalación de Componentes
+
+```bash
+# Instalar componente individual
+npx shadcn-ui@latest add button
+
+# Instalar múltiples componentes
+npx shadcn-ui@latest add button card input select dialog
+
+# Inicializar shadcn/ui (primera vez)
+npx shadcn-ui@latest init
+```
+
+---
+
+## Componentes Custom
+
+### Layout Components
+
+#### Header
+- **Ubicación:** `src/components/layout/Header.tsx`
+- **Props:**
+  - `title?: string` - Título de la app
+  - `showSearch?: boolean` - Mostrar barra de búsqueda
+- **Contenido:**
+  - Logo de la aplicación
+  - Navegación principal (Home, Películas, Series)
+  - Barra de búsqueda
+  - Toggle de tema (Sol/Luna)
+
+#### Footer
+- **Ubicación:** `src/components/layout/Footer.tsx`
+- **Props:** None
+- **Contenido:**
+  - Enlaces sociales
+  - Información de copyright
+  - Enlaces legales
+
+#### MainLayout
+- **Ubicación:** `src/components/layout/MainLayout.tsx`
+- **Props:** `children: ReactNode`
+- **Contenido:**
+  - Wrapper principal
+  - Incluye Header y Footer
+  - Gestión de scroll global
+
+---
+
+### Media Components
+
+#### MediaCard
+- **Ubicación:** `src/components/media/MediaCard.tsx`
+- **Props:**
+  - `media: Movie | TVShow` - Datos del contenido
+  - `onClick: () => void` - Callback al hacer click
+  - `showRating?: boolean` - Mostrar rating (default: true)
+- **Características:**
+  - Poster con hover effect
+  - Rating con estrellas
+  - Año de lanzamiento
+  - Skeleton de carga
+
+#### MediaRow
+- **Ubicación:** `src/components/media/MediaRow.tsx`
+- **Props:**
+  - `title: string` - Título de la sección
+  - `mediaList: Movie[] | TVShow[]` - Lista de contenido
+  - `loading?: boolean` - Estado de carga
+- **Características:**
+  - Título de sección
+  - Scroll horizontal
+  - Flechas de navegación
+  - Skeleton de carga
+
+#### MediaGrid
+- **Ubicación:** `src/components/media/MediaGrid.tsx`
+- **Props:**
+  - `mediaList: Movie[] | TVShow[]` - Lista de contenido
+  - `columns?: number` - Número de columnas (responsivo)
+  - `loading?: boolean` - Estado de carga
+- **Características:**
+  - Grid responsivo (1-6 columnas)
+  - Soporte para paginación
+  - Skeleton de carga
+
+#### HeroBanner
+- **Ubicación:** `src/components/media/HeroBanner.tsx`
+- **Props:**
+  - `media?: Movie | TVShow` - Contenido destacado
+  - `loading?: boolean` - Estado de carga
+- **Características:**
+  - Imagen de fondo grande (backdrop)
+  - Título destacado
+  - Descripción corta
+  - Botón "Ver ahora"
+  - Botón "Más información"
+  - Skeleton de carga
+
+---
+
+### Detail Components
+
+#### MovieDetail
+- **Ubicación:** `src/components/detail/MovieDetail.tsx`
+- **Tipo:** Class Component (legacy)
+- **Props:**
+  - `movie: MovieDetails` - Datos de la película
+  - `loading?: boolean` - Estado de carga
+- **Características:**
+  - Banner con backdrop
+  - Información completa
+  - Elenco (CastList)
+  - Trailers (VideoPlayer)
+  - Contenido similar
+
+#### TVDetail
+- **Ubicación:** `src/components/detail/TVDetail.tsx`
+- **Tipo:** Class Component (legacy)
+- **Props:**
+  - `tvShow: TVShowDetails` - Datos de la serie
+  - `loading?: boolean` - Estado de carga
+- **Características:**
+  - Banner con backdrop
+  - Información completa
+  - Lista de temporadas (dropdown)
+  - Elenco (CastList)
+  - Trailers (VideoPlayer)
+  - Contenido similar
+
+#### CastList
+- **Ubicación:** `src/components/detail/CastList.tsx`
+- **Props:**
+  - `cast: Cast[]` - Lista del elenco
+  - `loading?: boolean` - Estado de carga
+- **Características:**
+  - Grid de actores
+  - Foto, nombre, personaje
+  - Scroll horizontal
+  - Skeleton de carga
+
+#### GenreTags
+- **Ubicación:** `src/components/detail/GenreTags.tsx`
+- **Props:**
+  - `genres: Genre[]` - Lista de géneros
+  - `onGenreClick?: (genre: Genre) => void` - Callback al click
+- **Características:**
+  - Tags clickeables
+  - Scroll horizontal
+  - Colores adaptativos al tema
+
+#### SimilarMedia
+- **Ubicación:** `src/components/detail/SimilarMedia.tsx`
+- **Props:**
+  - `mediaList: Movie[] | TVShow[]` - Lista de contenido similar
+  - `mediaType: 'movie' | 'tv'` - Tipo de contenido
+  - `title?: string` - Título de sección
+- **Características:**
+  - Grid de contenido similar
+  - Cards con click para navegar
+  - Skeleton de carga
+
+#### VideoPlayer
+- **Ubicación:** `src/components/detail/VideoPlayer.tsx`
+- **Props:**
+  - `videos: Video[]` - Lista de videos
+  - `loading?: boolean` - Estado de carga
+- **Características:**
+  - Reproductor de YouTube embed
+  - **Dropdown moderno** para selección de trailers
+  - Lista de videos disponibles
+
+---
+
+### Search Components
+
+#### SearchBar
+- **Ubicación:** `src/components/search/SearchBar.tsx`
+- **Props:**
+  - `onSearch: (query: string) => void` - Callback al buscar
+  - `placeholder?: string` - Placeholder del input
+  - `loading?: boolean` - Estado de carga
+- **Características:**
+  - Input con icono de búsqueda
+  - Debounce en typing
+  - Dropdown moderno para resultados rápidos
+  - Colores adaptativos al tema
+
+#### SearchResults
+- **Ubicación:** `src/components/search/SearchResults.tsx`
+- **Props:**
+  - `results: SearchResult[]` - Resultados de búsqueda
+  - `loading?: boolean` - Estado de carga
+  - `mediaType?: 'all' | 'movie' | 'tv'` - Filtro por tipo
+- **Características:**
+  - Grid de resultados
+  - Tabs para filtrar por tipo (Películas/Series/Personas)
+  - Skeleton de carga
+  - Estado vacío sin resultados
+
+#### SearchFilter
+- **Ubicación:** `src/components/search/SearchFilter.tsx`
+- **Props:**
+  - `filters: SearchFilters` - Filtros aplicados
+  - `onFilterChange: (filters: SearchFilters) => void` - Callback al cambiar filtros
+  - `genres: Genre[]` - Lista de géneros disponibles
+- **Características:**
+  - **Dropdowns modernos** para filtros
+  - Género (multi-select dropdown)
+  - Año (dropdown o range slider)
+  - Rating (dropdown con estrellas)
+  - Reset de filtros
+
+---
+
+### Common Components
+
+#### LoadingSpinner
+- **Ubicación:** `src/components/common/LoadingSpinner.tsx`
+- **Props:**
+  - `size?: 'sm' | 'md' | 'lg' | 'xl'` - Tamaño (default: md)
+  - `color?: string` - Color (default: primary)
+- **Características:**
+  - Spinner animado
+  - Configurable size/color
+
+#### ErrorMessage
+- **Ubicación:** `src/components/common/ErrorMessage.tsx`
+- **Props:**
+  - `message: string` - Mensaje de error
+  - `onRetry?: () => void` - Callback para reintentar
+- **Características:**
+  - Mensaje de error amigable
+  - Botón de reintentar
+  - Colores adaptativos al tema
+
+#### ErrorBoundary
+- **Ubicación:** `src/components/common/ErrorBoundary.tsx`
+- **Tipo:** Class Component (legacy)
+- **Props:**
+  - `children: ReactNode` - Componentes hijos
+  - `fallback?: ReactNode` - Fallback personalizado
+- **Características:**
+  - Captura de errores de React
+  - UI de error amigable
+
+---
+
+## Estados de Carga (Skeletons)
+
+### Skeleton Component (shadcn/ui)
+
+```tsx
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Skeleton para MediaCard
+<Skeleton className="w-full aspect-[2/3] rounded-lg" />
+
+// Skeleton para HeroBanner
+<Skeleton className="w-full h-[60vh] rounded-lg" />
+
+// Skeleton para texto
+<Skeleton className="h-4 w-[250px]" />
+<Skeleton className="h-4 w-[200px]" />
+```
+
+### Ubicaciones de Skeleton
+
+| Componente | Tipo de Skeleton |
+|------------|------------------|
+| MediaCard | Poster rectángulo + skeleton de texto |
+| MediaRow | Múltiples cards con skeleton |
+| MediaGrid | Grid de cards con skeleton |
+| HeroBanner | Banner grande con skeleton |
+| CastList | Avatares circulares con skeleton |
+| MovieDetail/TVDetail | Banner + skeleton de información |
+| SearchResults | Grid de skeletons |
+| SearchBar | Skeleton de input |
+
+---
+
+## Dropdowns Modernos
+
+### shadcn/ui DropdownMenu
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+
+// Dropdown básico
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Abrir</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>Opción 1</DropdownMenuItem>
+    <DropdownMenuItem>Opción 2</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Características de Dropdowns Modernos
+
+| Característica | Descripción |
+|---------------|-------------|
+| Animación | Smooth fade + scale (150ms) |
+| Posicionamiento | Auto (bottom-start, top-end, etc.) |
+| Soporte de teclado | Arrow keys + Enter/Escape |
+| Colores | Adaptativos al tema (Claro/Oscuro) |
+| Iconos | Soporte para Lucide icons |
+| Accesibilidad | ARIA labels, focus management |
+| Offset | Personalizable (gap entre trigger y content) |
+
+### Dropdowns en la App
+
+| Ubicación | Tipo de Dropdown | Propósito |
+|-----------|------------------|------------|
+| VideoPlayer | Select de trailers | Elegir trailer a reproducir |
+| TVDetail | Select de temporadas | Navegar entre temporadas |
+| SearchFilter | Multi-select géneros | Filtrar por múltiples géneros |
+| SearchFilter | Dropdown de año | Filtrar por año |
+| SearchFilter | Dropdown de rating | Filtrar por valoración |
+| Paginación | Select de página | Navegar a página específica |
+
+---
+
+## Filtros Comunes en Listados
+
+### Tipos de Filtros
+
+| Filtro | Tipo | Componente | Valores |
+|--------|-------|-------------|----------|
+| **Género** | Multi-select | DropdownMenu | IDs de géneros TMDB |
+| **Año** | Range o Select | DropdownMenu/Slider | Año (ej: 2024) |
+| **Rating** | Select | DropdownMenu | 0-10 (estrellas) |
+| **Tipo** | Tabs | Tabs | Películas/Series |
+
+### Componente SearchFilter
+
+```tsx
+interface SearchFilters {
+  genres?: number[];
+  year?: number;
+  rating?: number;
+  type?: 'all' | 'movie' | 'tv';
+}
+
+// Ejemplo de uso en MoviesPage
+<SearchFilter
+  filters={filters}
+  onFilterChange={setFilters}
+  genres={genres}
+/>
+```
+
+### Dropdowns de Filtros
+
+#### Filtro de Género (Multi-select)
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">
+      <Filter className="mr-2 h-4 w-4" />
+      Géneros
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuLabel>Seleccionar Géneros</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    {genres.map((genre) => (
+      <DropdownMenuItem key={genre.id}>
+        <Checkbox checked={selectedGenres.includes(genre.id)} />
+        {genre.name}
+      </DropdownMenuItem>
+    ))}
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+#### Filtro de Año (Dropdown)
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Año</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem onClick={() => setYear(2024)}>2024</DropdownMenuItem>
+    <DropdownMenuItem onClick={() => setYear(2023)}>2023</DropdownMenuItem>
+    <DropdownMenuItem onClick={() => setYear(2022)}>2022</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+#### Filtro de Rating (Dropdown con estrellas)
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">
+      <Star className="mr-2 h-4 w-4" />
+      Rating
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem onClick={() => setRating(8)}>★★★★☆ (8+)</DropdownMenuItem>
+    <DropdownMenuItem onClick={() => setRating(7)}>★★★☆☆ (7+)</DropdownMenuItem>
+    <DropdownMenuItem onClick={() => setRating(6)}>★★☆☆☆ (6+)</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+---
+
+## Paginación
+
+### Componente de Paginación
+
+```tsx
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  loading?: boolean;
+}
+
+// Dropdown de páginas
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">
+      Página {currentPage} de {totalPages}
+      <ChevronDown className="ml-2 h-4 w-4" />
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    {Array.from({ length: Math.min(totalPages, 10) }).map((_, i) => (
+      <DropdownMenuItem key={i + 1} onClick={() => onPageChange(i + 1)}>
+        {i + 1}
+      </DropdownMenuItem>
+    ))}
+  </DropdownMenuContent>
+</DropdownMenu>
+
+// Botones de navegación
+<div className="flex gap-2">
+  <Button
+    variant="outline"
+    onClick={() => onPageChange(currentPage - 1)}
+    disabled={currentPage === 1}
+  >
+    <ChevronLeft className="h-4 w-4" />
+  </Button>
+  <Button
+    variant="outline"
+    onClick={() => onPageChange(currentPage + 1)}
+    disabled={currentPage === totalPages}
+  >
+    <ChevronRight className="h-4 w-4" />
+  </Button>
+</div>
+```
+
+### Paginación en Listados
+
+| Página | Tipo de Paginación |
+|---------|-------------------|
+| MoviesPage | Dropdown de páginas + Anterior/Siguiente |
+| TVShowsPage | Dropdown de páginas + Anterior/Siguiente |
+| SearchPage | Infinite scroll o Dropdown de páginas |
+| Home Page | Ver más (load more) |
+
+---
+
+## Espaciado
+
+### Escala de Espaciado (Tailwind)
+
+| Clase | Tamaño | Uso |
+|--------|---------|-----|
+| `p-1` | 4px | Espacio muy pequeño |
+| `p-2` | 8px | Espacio pequeño |
+| `p-3` | 12px | Espacio regular |
+| `p-4` | 16px | Espacio medio |
+| `p-6` | 24px | Espacio grande |
+| `p-8` | 32px | Espacio muy grande |
+| `gap-2` | 8px | Gap entre elementos |
+| `gap-4` | 16px | Gap medio |
+| `gap-6` | 24px | Gap grande |
+| `gap-8` | 32px | Gap muy grande |
+
+---
+
+## Responsividad
+
+### Breakpoints
+
+| Breakpoint | Ancho | Dispositivo |
+|------------|--------|-------------|
+| `sm` | 640px | Mobile grande |
+| `md` | 768px | Tablet |
+| `lg` | 1024px | Laptop |
+| `xl` | 1280px | Desktop |
+| `2xl` | 1536px | Desktop grande |
+
+### Grid Responsivo
+
+```tsx
+// MediaGrid responsivo
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+  {mediaList.map((media) => (
+    <MediaCard key={media.id} media={media} />
+  ))}
+</div>
+```
+
+| Breakpoint | Columnas |
+|------------|-----------|
+| Mobile (< 640px) | 1 columna |
+| sm (640px+) | 2 columnas |
+| md (768px+) | 3 columnas |
+| lg (1024px+) | 4 columnas |
+| xl (1280px+) | 5 columnas |
+| 2xl (1536px+) | 6 columnas |
+
+---
+
+## Animaciones
+
+### Transiciones
+
+```css
+/* Transición suave para tema */
+* {
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+/* Transición de hover */
+.card {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+```
+
+### Efectos de Hover
+
+| Elemento | Efecto |
+|-----------|---------|
+| MediaCard | Scale 1.05 + shadow |
+| Button | Scale 0.95 |
+| Header item | Underline animation |
+| Dropdown | Fade + scale |
+
+---
+
+## Accesibilidad
+
+### Contraste de Colores
+
+| Elemento | Tema Oscuro | Tema Claro | WCAG AA |
+|-----------|--------------|-------------|----------|
+| Texto primario | #FFFFFF on #141414 | #141414 on #FFFFFF | ✅ |
+| Texto secundario | #B3B3B3 on #141414 | #666666 on #FFFFFF | ✅ |
+| Botón primario | #FFFFFF on #E50914 | #FFFFFF on #E50914 | ✅ |
+| Bordes | #404040 | #D1D1D1 | ✅ |
+
+### ARIA Labels
+
+```tsx
+// Toggle de tema
+<button
+  aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+>
+  {theme === 'dark' ? <Sun /> : <Moon />}
+</button>
+
+// Búsqueda
+<input
+  aria-label="Buscar películas y series"
+  placeholder="Buscar..."
+/>
+```
+
+---
+
+## Referencias
+
+- [shadcn/ui Components](https://ui.shadcn.com/docs/components)
+- [Tailwind CSS Colors](https://tailwindcss.com/docs/customizing-colors)
+- [Lucide Icons](https://lucide.dev)
+- [WCAG Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
