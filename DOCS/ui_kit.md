@@ -8,6 +8,7 @@ Documentación completa de componentes, estilos y sistema de diseño de la aplic
 
 - [Tailwind Tokens](#tailwind-tokens)
 - [Wireframes](#wireframes)
+- [Skeleton Patterns](#skeleton-patterns)
 - [Sistema de Colores](#sistema-de-colores)
 - [Temas](#temas)
 - [Tipografía](#tipografía)
@@ -54,6 +55,25 @@ Este archivo incluye:
 ```bash
 # Ver wireframes completos
 cat DOCS/wireframes.md
+```
+
+---
+
+## Skeleton Patterns
+
+> 🦴 Patrones de carga (Skeleton) para MovieCard y Detail con dimensiones, tiempos y shimmer.
+
+Este archivo incluye:
+- **Principios UX de Skeleton** - Indicadores, estructura, transiciones
+- **MovieCard Skeleton** - Dimensiones, estructura interna, estados
+- **Detail Skeleton** - Dimensiones por sección, estructura completa
+- **Shimmer Animation** - Cuándo usar shimmer vs pulse, configuración CSS
+- **Tiempos de Carga** - Timing matrix por tamaño y conexión
+- **Checklist Skeleton vs Empty** - Flujo de decisión, cuando usar cada estado
+
+```bash
+# Ver patrones de skeleton completos
+cat DOCS/skeleton_patterns.md
 ```
 
 ---
