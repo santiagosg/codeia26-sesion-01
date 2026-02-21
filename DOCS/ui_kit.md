@@ -7,6 +7,7 @@ Documentación completa de componentes, estilos y sistema de diseño de la aplic
 ## Tabla de Contenidos
 
 - [Tailwind Tokens](#tailwind-tokens)
+- [Wireframes](#wireframes)
 - [Sistema de Colores](#sistema-de-colores)
 - [Temas](#temas)
 - [Tipografía](#tipografía)
@@ -37,6 +38,22 @@ Este archivo incluye:
 ```bash
 # Ver tokens de Tailwind
 cat DOCS/tailwind_tokens.md
+```
+
+---
+
+## Wireframes
+
+> 📐 Wireframes anotados de Home y Detail view con ASCII, Mermaid diagrams, leyendas de componentes e interacciones.
+
+Este archivo incluye:
+- **Home Page** - Wireframe ASCII + Component Tree Mermaid + Leyenda + Interacciones
+- **Detail View** - Wireframe ASCII + Component Tree Mermaid + Leyenda + Interacciones
+- **Criterios de Legibilidad** - Contraste, typography, overlays, z-index layering
+
+```bash
+# Ver wireframes completos
+cat DOCS/wireframes.md
 ```
 
 ---
