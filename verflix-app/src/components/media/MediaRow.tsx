@@ -1,14 +1,14 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { MediaCard, MediaCardSkeleton } from './MediaCard';
-import type { Movie, TVShow } from '@/types';
+import type { Movie, TVShow, MediaSearchResult } from '@/types';
 import { Button } from '@/components/ui/button';
 
 interface MediaRowProps {
   title: string;
-  mediaList: Movie[] | TVShow[];
+  mediaList: Movie[] | TVShow[] | MediaSearchResult[];
   loading?: boolean;
-  onMediaClick?: (media: Movie | TVShow) => void;
+  onMediaClick?: (media: Movie | TVShow | MediaSearchResult) => void;
 }
 
 export function MediaRow({ title, mediaList, loading = false, onMediaClick }: MediaRowProps) {

@@ -193,10 +193,12 @@ export interface SearchFilters {
   page?: number;
 }
 
-export interface SearchResult extends Partial<Movie | TVShow | Person> {
-  media_type: 'movie' | 'tv' | 'person';
-  profile_path: string | null;
-}
+export type SearchResult =
+  | (Movie & { media_type: 'movie' })
+  | (TVShow & { media_type: 'tv' })
+  | (Person & { media_type: 'person' });
+
+export type MediaSearchResult = Extract<SearchResult, Movie | TVShow>;
 
 export interface SearchResultsResponse {
   page: number;

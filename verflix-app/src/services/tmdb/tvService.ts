@@ -1,5 +1,5 @@
 import tmdbClient from '../api/axiosConfig';
-import type { TVShow, TVShowDetails, TVShowListResponse } from '@/types';
+import type { TVShowDetails, TVShowListResponse } from '@/types';
 
 export const tvService = {
   // Get popular TV shows

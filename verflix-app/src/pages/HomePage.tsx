@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { movieService, tvService, searchService } from '@/services';
-import type { Movie, TVShow } from '@/types';
+import type { Movie, TVShow, SearchResult, MediaSearchResult } from '@/types';
 import { Navbar } from '@/components/layout/Navbar';
 import { HeroBanner } from '@/components/media/HeroBanner';
 import { MediaRow } from '@/components/media/MediaRow';
@@ -11,7 +11,7 @@ export function HomePage() {
   const navigate = useNavigate();
   const { loading: configLoading } = useApp();
 
-  const [trending, setTrending] = useState<(Movie | TVShow)[]>([]);
+  const [trending, setTrending] = useState<SearchResult[]>([]);
   const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
   const [topRatedMovies, setTopRatedMovies] = useState<Movie[]>([]);
   const [popularTV, setPopularTV] = useState<TVShow[]>([]);
@@ -44,7 +44,7 @@ export function HomePage() {
     loadContent();
   }, []);
 
-  const handleMediaClick = (media: Movie | TVShow) => {
+  const handleMediaClick = (media: Movie | TVShow | SearchResult) => {
     const mediaType = 'title' in media ? 'movie' : 'tv';
     navigate(`/${mediaType}/${media.id}`);
   };
@@ -76,7 +76,7 @@ export function HomePage() {
     );
   }
 
-  const featuredMedia = trending[0];
+  const featuredMedia = trending[0] as MediaSearchResult | undefined;
 
   return (
     <div className="min-h-screen bg-background pb-12">
@@ -97,7 +97,7 @@ export function HomePage() {
           {trending.slice(1).length > 0 && (
             <MediaRow
               title="Tendencias"
-              mediaList={trending.slice(1)}
+              mediaList={trending.slice(1) as MediaSearchResult[]}
               onMediaClick={handleMediaClick}
             />
           )}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Play } from 'lucide-react';
 import { getImageUrl } from '@/services';
 import type { Movie, TVShow } from '@/types';

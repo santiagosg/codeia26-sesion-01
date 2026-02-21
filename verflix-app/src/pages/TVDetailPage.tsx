@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Play, Star, Clock, Calendar, X, Heart, Share, User, Tv } from 'lucide-react';
+import { Play, Star, Calendar, Heart, Share, User, Tv } from 'lucide-react';
 import { tvService, getImageUrl, getBackdropUrl, getProfileUrl } from '@/services';
-import type { TVShowDetails, TVShow } from '@/types';
+import type { TVShowDetails } from '@/types';
 import { Navbar } from '@/components/layout/Navbar';
 import { MediaCard, MediaCardSkeleton } from '@/components/media/MediaCard';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -37,12 +37,6 @@ export function TVDetailPage() {
   }, [id]);
 
   const trailer = show?.videos?.results?.find((v) => v.type === 'Trailer' && v.site === 'YouTube');
-
-  const formatRuntime = (minutes: number) => {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return `${hours}h ${mins}min`;
-  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('es-ES', {

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { configService, getImageUrl } from '@/services';
+import { configService } from '@/services';
 import type { Genre } from '@/types';
 
 interface AppContextType {
@@ -11,7 +11,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [imageBaseUrl, setImageBaseUrl] = useState<string>(
+  const [imageBaseUrl] = useState<string>(
     import.meta.env.VITE_TMDB_IMAGE_BASE_URL || 'https://image.tmdb.org/t/p'
   );
   const [genres, setGenres] = useState<Genre[]>([]);

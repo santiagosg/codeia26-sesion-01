@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import type { FormEvent } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { searchService } from '@/services';
-import type { SearchResult } from '@/types';
+import type { SearchResult, MediaSearchResult } from '@/types';
 import { Navbar } from '@/components/layout/Navbar';
 import { MediaCard, MediaCardSkeleton } from '@/components/media/MediaCard';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, ChevronLeft, ChevronRight, Film, Tv, User } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, Film, Tv } from 'lucide-react';
 
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,7 +59,7 @@ export function SearchPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery)}&type=${mediaType}`);
@@ -79,7 +80,7 @@ export function SearchPage() {
   };
 
   const mediaResults = results.filter(
-    (r) => r.media_type === 'movie' || r.media_type === 'tv'
+    (r): r is MediaSearchResult => r.media_type === 'movie' || r.media_type === 'tv'
   );
 
   const typeLabels = {

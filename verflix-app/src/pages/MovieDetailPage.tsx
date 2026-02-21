@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Play, Star, Clock, Calendar, X, Heart, Share } from 'lucide-react';
+import { Play, Star, Clock, Calendar, User, Heart, Share } from 'lucide-react';
 import { movieService, getImageUrl, getBackdropUrl, getProfileUrl } from '@/services';
-import type { MovieDetails, Movie } from '@/types';
+import type { MovieDetails } from '@/types';
 import { Navbar } from '@/components/layout/Navbar';
 import { MediaCard, MediaCardSkeleton } from '@/components/media/MediaCard';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';

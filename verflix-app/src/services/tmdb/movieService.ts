@@ -1,5 +1,5 @@
 import tmdbClient from '../api/axiosConfig';
-import type { Movie, MovieDetails, MovieListResponse } from '@/types';
+import type { MovieDetails, MovieListResponse } from '@/types';
 
 export const movieService = {
   // Get popular movies

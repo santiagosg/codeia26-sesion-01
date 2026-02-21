@@ -1,4 +1,3 @@
-import React from 'react';
 import { Play, Info, Star } from 'lucide-react';
 import { getBackdropUrl } from '@/services';
 import type { Movie, TVShow } from '@/types';
