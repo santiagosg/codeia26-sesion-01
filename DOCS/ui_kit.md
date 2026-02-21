@@ -9,6 +9,7 @@ Documentación completa de componentes, estilos y sistema de diseño de la aplic
 - [Tailwind Tokens](#tailwind-tokens)
 - [Wireframes](#wireframes)
 - [Skeleton Patterns](#skeleton-patterns)
+- [Search UX](#search-ux)
 - [Sistema de Colores](#sistema-de-colores)
 - [Temas](#temas)
 - [Tipografía](#tipografía)
@@ -468,6 +469,26 @@ import { Skeleton } from "@/components/ui/skeleton";
 | MovieDetail/TVDetail | Banner + skeleton de información |
 | SearchResults | Grid de skeletons |
 | SearchBar | Skeleton de input |
+
+---
+
+## Search UX
+
+> 🔍 Experiencia de búsqueda con Command K, resultados navegables y accesibilidad completa.
+
+Este archivo incluye:
+- **Trigger del Command** - Atajos de teclado (Ctrl/Cmd+K, /, Escape)
+- **Estados del Command** - Closed, Open, Searching, Results, Empty, Error
+- **Resultados de Búsqueda** - Estructura con título/año/rating, orden de relevancia
+- **Navegación por Teclado** - Arrow keys, Home/End, Enter, Tab
+- **Estados Vacíos y Errores** - Empty state con CTA, error state con retry
+- **Criterios de Focus** - Orden de focus, focus trap, focus visible indicators
+- **Roles ARIA** - Estructura completa de ARIA para accesibilidad
+
+```bash
+# Ver experiencia de búsqueda completa
+cat DOCS/search_ux.md
+```
 
 ---
 
