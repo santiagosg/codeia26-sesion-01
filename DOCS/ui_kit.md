@@ -6,6 +6,7 @@ Documentación completa de componentes, estilos y sistema de diseño de la aplic
 
 ## Tabla de Contenidos
 
+- [Tailwind Tokens](#tailwind-tokens)
 - [Sistema de Colores](#sistema-de-colores)
 - [Temas](#temas)
 - [Tipografía](#tipografía)
@@ -17,6 +18,26 @@ Documentación completa de componentes, estilos y sistema de diseño de la aplic
 - [Paginación](#paginacion)
 - [Espaciado](#espaciado)
 - [Responsividad](#responsividad)
+- [Netflix UI Kit Specification](#netflix-ui-kit-specification)
+
+---
+
+## Tailwind Tokens
+
+> 📋 La definición completa de tokens de diseño con ejemplos de uso conceptual se encuentra en **[tailwind_tokens.md](tailwind_tokens.md)**
+
+Este archivo incluye:
+- **Colores Semánticos** - Brand, overlay, y rating colors
+- **Spacing System** - card-gap, section-y, hero-padding, touch-target
+- **Typography Scale** - display, hero, card, meta, badge
+- **Animation Timing** - hover, focus, modal durations + easing curves
+- **Border Radius** - card, badge, button, modal
+- **Ejemplos de Uso** - Implementaciones conceptuales con código
+
+```bash
+# Ver tokens de Tailwind
+cat DOCS/tailwind_tokens.md
+```
 
 ---
 
@@ -736,12 +757,7 @@ Especificación completa del kit mínimo de componentes para una interfaz tipo N
   - [MovieCard Variants](#moviecard-variants)
   - [Badge Variants](#badge-variants)
   - [Button Variants](#button-variants)
-- [Tokens de Tailwind](#tokens-de-tailwind)
-  - [Colores Semánticos](#colores-semánticos)
-  - [Spacing System](#spacing-system)
-  - [Typography Scale](#typography-scale)
-  - [Animation Timing](#animation-timing)
-  - [Border Radius](#border-radius)
+- [Tokens de Tailwind](#tokens-de-tailwind) → Ver [tailwind_tokens.md](tailwind_tokens.md)
 - [Reglas de Accesibilidad](#reglas-de-accesibilidad-wcag-21-aa)
 
 ---
@@ -831,81 +847,17 @@ Especificación completa del kit mínimo de componentes para una interfaz tipo N
 
 ## Tokens de Tailwind
 
-### Colores Semánticos
+> ⚠️ La definición completa de tokens de Tailwind con ejemplos de uso conceptual ha sido movida a [tailwind_tokens.md](tailwind_tokens.md).
 
-```tailwind
-colors: {
-  // Brand
-  brand: {
-    red: '#E50914',      // Netflix red primary
-    redHover: '#f40612', // Red hover state
-    black: '#141414',    // Background primary
-    dark: '#181818',     // Card/background secondary
-  },
+### Resumen Rápido
 
-  // UI States
-  overlay: {
-    idle: 'rgba(0, 0, 0, 0.0)',
-    hover: 'rgba(0, 0, 0, 0.7)',
-    focus: 'rgba(255, 255, 255, 0.2)',
-  },
-
-  // Rating Colors
-  rating: {
-    high: '#46d369',   // 80-100%
-    medium: '#dcdcdc', // 50-79%
-    low: '#e50914',    // 0-49%
-  },
-}
-```
-
-### Spacing System
-
-```tailwind
-spacing: {
-  'card-gap': '1rem',      // Grid gap: 16px
-  'section-y': '3rem',     // Section vertical spacing: 48px
-  'hero-padding': '4rem',   // Hero content padding: 64px
-  'touch-target': '44px',   // Minimum touch target
-}
-```
-
-### Typography Scale
-
-```tailwind
-fontSize: {
-  'display': ['2.5rem', { lineHeight: '1.1', fontWeight: '700' }],  // Hero title
-  'hero': ['1.75rem', { lineHeight: '1.2', fontWeight: '600' }],   // Section title
-  'card': ['0.875rem', { lineHeight: '1.3', fontWeight: '500' }],  // Card title
-  'meta': ['0.75rem', { lineHeight: '1.4', fontWeight: '400' }],  // Metadata
-  'badge': ['0.625rem', { lineHeight: '1.2', fontWeight: '500' }], // Badge text
-}
-```
-
-### Animation Timing
-
-```tailwind
-transitionTimingFunction: {
-  'netflix-ease': 'cubic-bezier(0.4, 0.0, 0.2, 1)', // Material standard
-  'snappy': 'cubic-bezier(0.16, 1, 0.3, 1)',        // Quick interactions
-},
-transitionDuration: {
-  'hover': '200ms',
-  'focus': '150ms',
-  'modal': '300ms',
-}
-```
-
-### Border Radius
-
-```tailwind
-borderRadius: {
-  'card': '4px',     // MovieCard corners
-  'badge': '9999px', // Pill badges
-  'button': '8px',   // Button rounding
-  'modal': '12px',   // Modal/drawer
-}
-```
+| Categoría | Archivo | Contenido |
+|-----------|---------|-----------|
+| **Colores Semánticos** | [tailwind_tokens.md](tailwind_tokens.md#colores-semánticos) | Brand, overlay, rating colors |
+| **Spacing System** | [tailwind_tokens.md](tailwind_tokens.md#spacing-system) | card-gap, section-y, hero-padding, touch-target |
+| **Typography Scale** | [tailwind_tokens.md](tailwind_tokens.md#typography-scale) | display, hero, card, meta, badge |
+| **Animation Timing** | [tailwind_tokens.md](tailwind_tokens.md#animation-timing) | hover, focus, modal durations + easing |
+| **Border Radius** | [tailwind_tokens.md](tailwind_tokens.md#border-radius) | card, badge, button, modal |
 
 ---
 
