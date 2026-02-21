@@ -798,6 +798,51 @@ interface PaginationProps {
 
 ---
 
+# Netflix Pattern Equivalences
+
+Tabla de mapeo entre patrones típicos de Netflix y combinaciones de componentes shadcn/ui + utilidades Tailwind, con riesgos y mitigaciones.
+
+| Patrón Netflix | shadcn/ui Component | Tailwind Classes | Riesgos | Mitigaciones |
+|----------------|---------------------|------------------|---------|--------------|
+| **Fila por Género** (Horizontal Carousel) | `ScrollArea` | `flex gap-4 overflow-x-auto snap-x scroll-smooth scrollbar-hide` | • Performance con muchas cards<br>• Scroll sin indicadores visuales<br>• Focus trap en mobile | • Virtual scrolling para >100 items<br>• `scrollbar-hide` + arrows para navegación<br>• `snap-center` + `focus-visible:ring-2` |
+| **Card Hover** (Scale + Expansion) | `Card` + `HoverCard` | `group hover:scale-105 hover:z-20 hover:shadow-2xl transition-all duration-200` | • Layout shift al escalar<br>• Z-index conflicts<br>• Performance con hover masivo | • `transform-gpu` para aceleración hardware<br>• `hover:z-20` en sibling cards<br>• `will-change-transform` solo en cards visibles |
+| **Trailer Modal** (YouTube Embed) | `Dialog` + `DialogTrigger` | `fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center` | • Video autoplay policies<br>• Escaping modal con focus<br>• Mobile keyboard issues | • `Dialog` con `onOpenChange` stop video<br>• `focus-trap` en DialogContent<br>• `max-w-[90vw] max-h-[90vh]` responsive |
+| **Badge de Rating** (Match/Match %) | `Badge` (variant="outline") | `rounded-full px-2 py-0.5 bg-black/50 backdrop-blur text-[10px] font-bold` | • Contraste insufficient en light mode<br>• Overcrowding en cards pequeñas | • `bg-black/70` en light, `text-white`<br>• Condicionar visibilidad en `<128px` width |
+| **Badge de Madurez** (TV-MA, PG-13) | `Badge` (variant="destructive") | `absolute top-2 right-2 px-1.5 py-0.5 text-[10px] border border-white/30` | • Confusión con rating de usuario<br>• Sobrepone sobre contenido importante | • Posicionar en corner predecible<br>• Usar icono + texto claro |
+| **Badge de Calidad** (4K, HD, 5.1) | `Badge` (custom) | `absolute bottom-2 right-2 bg-gradient-to-r from-blue-600 to-blue-400` | • No estándar en todas regiones<br>• Confusión con Dolby badges | • Tooltip con descripción completa<br>• Consistencia en posicionamiento |
+| **Hero Banner** (Full-width backdrop) | `Card` (custom layout) | `h-[70vh] relative bg-gradient-to-b from-transparent via-transparent to-black` | • Loading lento de backdrop<br>• Text readability en light mode | • Skeleton con gradient `from-neutral-900`<br>• `text-shadow-md` o overlay `bg-black/30` |
+| **Play Button** (Primary CTA) | `Button` (default) | `bg-white text-black hover:bg-white/90 rounded-lg px-6 py-2 flex items-center gap-2` | • Accidental clicks en scroll<br>• Feedback de estado missing | • `min-h-[44px]` touch target<br>• `disabled:opacity-50` + loading state |
+| **My List Button** (Toggle) | `Button` (outline/ghost) | `border border-white/30 bg-transparent hover:bg-white/10` | • Estado activo no claro<br>• No feedback visual inmediato | • `bg-white/20` + check icon en active<br>• `aria-pressed` + smooth transition |
+| **Cast Carousel** (Horizontal avatars) | `ScrollArea` + `Avatar` | `flex gap-4 overflow-x-auto snap-x scroll-smooth` | • Avatar overflow en diferentes tamaños<br>• Focus management complejo | • `Avatar` con `overflow-hidden`<br>• `role="list"` + keyboard nav |
+| **Similar Content Grid** (Related) | `Grid` + `MediaCard` | `grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4` | • Recomendación irrelevante<br>• Empty state no handled | • Skeleton antes de renderizar<br>• Empty state con CTA "Explore" |
+| **Genre Tags** (Clickable pills) | `Badge` + `Button` (ghost) | `inline-flex gap-2 overflow-x-auto whitespace-nowrap` | • Tags overflow en mobile<br>• Active state not visible | • `ScrollArea` horizontal wrapper<br>• `bg-primary text-primary-foreground` en active |
+| **Search Results** (Autocomplete) | `Command` + `Input` | `relative max-w-md w-full` | • Debounce no implementado<br>• Keyboard nav inconsistente | • `useDebounce` hook 300ms<br>• `Command` con keyboard handlers |
+| **Mobile Menu Drawer** | `Sheet` | `fixed inset-y-0 left-0 z-50 w-64 bg-black` | • Focus trap incorrecto<br>• Scroll body underneath | • `Sheet` con `focus-trap`<br>• `overflow-hidden` en body |
+| **Loading Shimmer** (Card placeholder) | `Skeleton` + `animate-pulse` | `bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-800 animate-shimmer` | • Perceived latency largo<br>• Flash of content | • `duration-700` ease-in-out<br>• `opacity-0` → `opacity-100` transition |
+
+---
+
+## Notas Adicionales por Categoría
+
+### Performance Risks Generales
+
+| Categoría | Riesgo Principal | Mitigación |
+|-----------|-----------------|------------|
+| **Imágenes** | LCP > 2.5s, CLS por lazy loading | `loading="lazy"`, `aspect-ratio` placeholder, WebP + AVIF |
+| **Animations** | Layout shifts, jank en low-end | `transform-gpu`, `will-change`, `prefers-reduced-motion` |
+| **Virtualization** | DOM nodes > 1000 en rows | `react-window` o `react-virtual` para lists largas |
+
+### Accesibilidad Cross-Pattern
+
+| Concern | Solución |
+|---------|----------|
+| **Keyboard Navigation** | Arrow keys en grids, `tabindex="0"` en cards |
+| **Screen Reader** | `aria-label` descriptivos, `aria-live` para loading |
+| **Focus Management** | `focus-visible` rings, focus trap en modals |
+| **Color Contrast** | 4.5:1 mínimo, no color-only communication |
+
+---
+
 # Netflix UI Kit Specification
 
 Especificación completa del kit mínimo de componentes para una interfaz tipo Netflix, utilizando shadcn/ui y Tailwind CSS.
