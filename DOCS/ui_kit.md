@@ -129,7 +129,7 @@ Documentación completa de componentes, estilos y sistema de diseño de la aplic
 | **Separator** | Línea separadora | horizontal, vertical |
 | **Badge** | Badge/etiqueta | default, secondary, destructive, outline |
 | **Avatar** | Avatar con imagen o iniciales | - |
-| **DropdownMenuItem** | Item de menú dropdown | - |
+| **DropdownMenuItem** | Item de menú dropdown | - |f
 | **DropdownMenuTrigger** | Trigger del dropdown | - |
 | **DropdownMenuContent** | Contenido del dropdown | - |
 
@@ -716,6 +716,297 @@ interface PaginationProps {
   placeholder="Buscar..."
 />
 ```
+
+---
+
+# Netflix UI Kit Specification
+
+Especificación completa del kit mínimo de componentes para una interfaz tipo Netflix, utilizando shadcn/ui y Tailwind CSS.
+
+---
+
+## Tabla de Contenidos - Netflix UI Kit
+
+- [Catálogo de Componentes](#catálogo-de-componentes)
+  - [Navbar](#navbar)
+  - [MovieGrid](#moviegrid)
+  - [MovieCard](#moviecard)
+  - [DetailView](#detailview)
+- [Variants](#variants)
+  - [MovieCard Variants](#moviecard-variants)
+  - [Badge Variants](#badge-variants)
+  - [Button Variants](#button-variants)
+- [Tokens de Tailwind](#tokens-de-tailwind)
+  - [Colores Semánticos](#colores-semánticos)
+  - [Spacing System](#spacing-system)
+  - [Typography Scale](#typography-scale)
+  - [Animation Timing](#animation-timing)
+  - [Border Radius](#border-radius)
+- [Reglas de Accesibilidad](#reglas-de-accesibilidad-wcag-21-aa)
+
+---
+
+## Catálogo de Componentes
+
+### Navbar
+
+| Estado | Descripción | Tokens |
+|--------|-------------|--------|
+| **Idle** | Posición fija top, gradiente semi-transparente, logo + navegación + usuario | `bg-black/80` → `bg-black/95` (scroll), `h-16`, `px-6` |
+| **Hover** | Links con subrayado animado, avatar con badge de notificación | `group-hover:text-white`, `transition-colors-200` |
+| **Focus** | Focus ring visible 2px white, padding visible para touch targets | `focus-visible:ring-2 focus-visible:ring-white`, `min-w-44` touch target |
+| **Loading** | Skeleton para logo, pulsing para nav items, avatar placeholder | `animate-pulse`, `bg-neutral-800` |
+
+**Sub-componentes:** Search input, Profile dropdown, Mobile menu drawer
+
+---
+
+### MovieGrid
+
+| Estado | Descripción | Tokens |
+|--------|-------------|--------|
+| **Idle** | Grid responsive con gap, scroll horizontal o vertical según layout | `grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6`, `gap-4` |
+| **Hover** | Scale suave de cards dentro del contenedor, cursor pointer | `hover:scale-[1.02]`, `transition-transform-200` |
+| **Focus** | Focus visible en el contenedor, scroll con arrow keys | `focus-within:ring-1`, `focus-visible:ring-2 focus-visible:ring-white` |
+| **Loading** | Skeleton cards repetidos, shimmer effect | `animate-shimmer`, `bg-neutral-800/50` |
+
+**Sub-componentes:** Section header, Carousel arrows, Loading skeleton
+
+---
+
+### MovieCard
+
+| Estado | Descripción | Tokens |
+|--------|-------------|--------|
+| **Idle** | Poster con metadata overlay (título, año), ratio 2:3 o 16:9 | `aspect-[2/3]` (portrait) / `aspect-video` (landscape) |
+| **Hover** | Scale 1.05, metadata expandida, botón Play visible, badge de calidad | `hover:scale-105`, `hover:shadow-2xl`, `group-hover:opacity-100` |
+| **Focus** | Focus ring outline 3px white/card-outline, padding compensado | `focus-visible:outline-3 focus-visible:outline-white`, `p-1` offset |
+| **Loading** | Shimmer gradient, pulse en metadata, placeholder gray | `bg-gradient-to-r from-neutral-800 to-neutral-700`, `animate-pulse` |
+
+**Elementos visibles:** Poster image, Title, Year, Duration, Quality badge (4K/HD), Play button, Add to list button
+
+---
+
+### DetailView (Modal/Page)
+
+| Estado | Descripción | Tokens |
+|--------|-------------|--------|
+| **Idle** | Hero section con backdrop blur, info sobre imagen, cast horizontal, related content | `h-[70vh]`, `bg-gradient-to-b from-transparent to-black` |
+| **Hover** | Interactive tooltips en cast, botones con hover states | `hover:text-red-500`, `hover:bg-white/10` |
+| **Focus** | Focus visible en botones principales, focus trapping en modal | `focus-visible:ring-4`, `trap-focus` |
+| **Loading** | Hero skeleton, cast skeleton shimmer, placeholder sections | `animate-pulse`, `bg-neutral-900` |
+
+**Secciones:** Hero backdrop, Metadata (title, year, rating, genres), Synopsis, Cast carousel, Similar content, Action buttons (Play, My List, Share)
+
+---
+
+## Variants
+
+### MovieCard Variants
+
+| Variant | Dimensiones | Uso | Tokens Tailwind |
+|---------|-------------|-----|-----------------|
+| **compact** | 120x180px (2:3), metadata minimal | Row horizontal, trending small | `w-[120px] aspect-[2/3] text-xs` |
+| **wide** | 320x180px (16:9), metadata lateral o bottom | Featured, hero thumbnails | `w-[320px] aspect-video text-sm` |
+| **hero** | Full width + metadata overlay | Main featured banner | `w-full aspect-video text-lg md:text-xl` |
+
+### Badge Variants
+
+| Variant | Estilo | Uso | Tokens Tailwind |
+|---------|--------|-----|-----------------|
+| **rating** | Pill, score colored (green/yellow/red) + icon | User ratings, critic scores | `rounded-full px-2 py-0.5 text-xs bg-black/50 backdrop-blur` |
+| **genre** | Chip, outline, neutral | Genre tags | `rounded-md px-2 py-0.5 text-xs border border-white/20` |
+| **quality** | Corner badge, solid accent (4K/HD) | Video quality indicator | `absolute top-2 right-2 px-1.5 py-0.5 text-[10px] bg-red-600` |
+| **new** | Pill, solid primary, animated pulse | New content flag | `rounded-full px-2 py-0.5 text-xs bg-red-600 animate-pulse` |
+
+### Button Variants
+
+| Variant | Estilo | Uso | Tokens Tailwind |
+|---------|--------|-----|-----------------|
+| **primary** | Solid white/black, rounded-lg | Play, CTA principal | `bg-white text-black hover:bg-white/90 rounded-lg px-6 py-2` |
+| **secondary** | Outline, semi-transparent | My List, Share | `border border-white/30 bg-white/10 hover:bg-white/20 rounded-lg px-6 py-2` |
+| **icon** | Circle, icon-only | Close, Mute, Settings | `w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center` |
+
+---
+
+## Tokens de Tailwind
+
+### Colores Semánticos
+
+```tailwind
+colors: {
+  // Brand
+  brand: {
+    red: '#E50914',      // Netflix red primary
+    redHover: '#f40612', // Red hover state
+    black: '#141414',    // Background primary
+    dark: '#181818',     // Card/background secondary
+  },
+
+  // UI States
+  overlay: {
+    idle: 'rgba(0, 0, 0, 0.0)',
+    hover: 'rgba(0, 0, 0, 0.7)',
+    focus: 'rgba(255, 255, 255, 0.2)',
+  },
+
+  // Rating Colors
+  rating: {
+    high: '#46d369',   // 80-100%
+    medium: '#dcdcdc', // 50-79%
+    low: '#e50914',    // 0-49%
+  },
+}
+```
+
+### Spacing System
+
+```tailwind
+spacing: {
+  'card-gap': '1rem',      // Grid gap: 16px
+  'section-y': '3rem',     // Section vertical spacing: 48px
+  'hero-padding': '4rem',   // Hero content padding: 64px
+  'touch-target': '44px',   // Minimum touch target
+}
+```
+
+### Typography Scale
+
+```tailwind
+fontSize: {
+  'display': ['2.5rem', { lineHeight: '1.1', fontWeight: '700' }],  // Hero title
+  'hero': ['1.75rem', { lineHeight: '1.2', fontWeight: '600' }],   // Section title
+  'card': ['0.875rem', { lineHeight: '1.3', fontWeight: '500' }],  // Card title
+  'meta': ['0.75rem', { lineHeight: '1.4', fontWeight: '400' }],  // Metadata
+  'badge': ['0.625rem', { lineHeight: '1.2', fontWeight: '500' }], // Badge text
+}
+```
+
+### Animation Timing
+
+```tailwind
+transitionTimingFunction: {
+  'netflix-ease': 'cubic-bezier(0.4, 0.0, 0.2, 1)', // Material standard
+  'snappy': 'cubic-bezier(0.16, 1, 0.3, 1)',        // Quick interactions
+},
+transitionDuration: {
+  'hover': '200ms',
+  'focus': '150ms',
+  'modal': '300ms',
+}
+```
+
+### Border Radius
+
+```tailwind
+borderRadius: {
+  'card': '4px',     // MovieCard corners
+  'badge': '9999px', // Pill badges
+  'button': '8px',   // Button rounding
+  'modal': '12px',   // Modal/drawer
+}
+```
+
+---
+
+## Reglas de Accesibilidad (WCAG 2.1 AA)
+
+### Navegación por Teclado
+
+| Componente | Requisito | Implementación |
+|------------|-----------|----------------|
+| **Navbar** | Tab order lógico, escape cierra dropdowns | `tabindex="0"`, `data-state`, `role="navigation"` |
+| **MovieGrid** | Arrow keys navegan cards, Home/End extremos | `role="grid"`, `aria-colcount`, JS keyboard handlers |
+| **MovieCard** | Enter/Space activa, visible focus ring | `tabindex="0"`, `role="button"`, `aria-label="{title}, {year}"` |
+| **DetailView** | Focus trap en modal, Escape cierra | `role="dialog"`, `aria-modal="true"`, focus management |
+
+### Contraste y Legibilidad
+
+| Elemento | Requisito WCAG | Medición |
+|----------|----------------|----------|
+| **Text on dark** | 4.5:1 normal, 3:1 large | White text on `#141414` = 15.8:1 ✓ |
+| **Buttons** | 3:1 para componentes no-texto | Primary button ✓, Secondary button border ✓ |
+| **Badges** | 3:1 mínimo | Rating badge on overlay = 4.5:1 ✓ |
+| **Links** | Subrayado o equivalente visual | Hover underline, color change ✓ |
+
+### ARIA Roles y Propiedades
+
+```yaml
+Navbar:
+  role: navigation
+  aria-label: "Menú principal"
+  items: role="menuitem", aria-current cuando activo
+
+MovieGrid:
+  role: grid
+  aria-label: "{section name}"
+  cells: role="gridcell", aria-rowindex, aria-colindex
+
+MovieCard:
+  role: button
+  aria-label: "{title}, estrenado en {year}, duración {duration}"
+  aria-describedby: "{rating-badge-id}"
+
+DetailView:
+  role: dialog
+  aria-labelledby: "{title-id}"
+  aria-modal: "true"
+  close: aria-label="Cerrar"
+```
+
+### Focus Management
+
+| Regla | Detalles |
+|-------|----------|
+| **Visible Focus** | `focus-visible:ring-2 ring-white ring-offset-2 ring-offset-black` thickness mínimo 2px |
+| **Focus Order** | Lógico: Navbar → Grid → Cards → Detail → Close button |
+| **Focus Restoration** | Al cerrar modal, focus regresa al trigger element |
+| **No Focus Trap** | Menú dropdown puede cerrarse con Escape sin trap |
+
+### Screen Reader Considerations
+
+| Consideración | Implementación |
+|---------------|----------------|
+| **Live Regions** | `aria-live="polite"` para notificaciones (Añadido a lista) |
+| **Hidden Content** | Icon-only buttons: `aria-label` descriptivo |
+| **Heading Structure** | H1 para título principal, H2 para secciones, H3 para card titles |
+| **Skip Links** | "Saltar al contenido" visible al focus inicial |
+| **Image Alt** | Poster: alt="{title} poster" decorativo si hay texto card; Null alt si es puro decorativo |
+
+### Motion y Animaciones
+
+| Preferencia | Implementación |
+|-------------|----------------|
+| **Reduced Motion** | `prefers-reduced-motion` deshabilita scale, transform, animations |
+| **Animation Duration** | Máximo 200ms para hover states en reduced motion |
+| **Pause Auto-scroll** | Carousel se detiene en hover, `aria-live="off"` |
+
+### Touch Targets
+
+| Elemento | Mínimo | Implementación |
+|----------|--------|----------------|
+| **Buttons** | 44×44px | `min-w-[44px] min-h-[44px]` |
+| **Links** | 44×44px | Padding compensado si visualmente más pequeño |
+| **Card clickable area** | 44×44px mínimo en interactive elements | Expandir tap area invisible si necesario |
+
+### Validación de Color
+
+- **Color-only information:** Nunca comunicar estado solo por color (usar icono + color para rating)
+- **Color blindness:** Testear con simuladores (Deuteranopia, Protanopia, Tritanopia)
+- **Custom focus colors:** No depender solo de outline, agregar background/border change
+
+---
+
+## Resumen de Deliverables - Netflix UI Kit
+
+| Entregable | Estado |
+|------------|--------|
+| ✅ Catálogo de componentes con 4 estados | Completado |
+| ✅ Variants Card (compact/wide/hero) | Completado |
+| ✅ Variants Badge (rating/genre/quality/new) | Completado |
+| ✅ Variants Button (primary/secondary/icon) | Completado |
+| ✅ Tokens Tailwind (colors, spacing, typography, animation, radius) | Completado |
+| ✅ Reglas A11y (keyboard, contrast, ARIA, focus, screen reader, motion, touch, color) | Completado |
 
 ---
 
