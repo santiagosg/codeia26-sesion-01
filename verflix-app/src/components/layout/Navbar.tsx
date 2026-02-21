@@ -40,10 +40,15 @@ export function Navbar() {
           : 'bg-gradient-to-b from-black/80 to-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div className="px-6 md:px-12 lg:px-24">
         <div className="flex items-center justify-between h-16">
           {/* Logo and nav links */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-8 relative">
+            <img
+              src="/logo.png"
+              alt="Verflix logo"
+              className="absolute left-[-20px] top-1/2 -translate-y-1/2 h-8 w-auto"
+            />
             <Link
               to="/"
               className="text-2xl font-bold text-netflix-red hover:opacity-90 transition-opacity"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Star } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { getImageUrl } from '@/services';
 import type { Movie, TVShow } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -44,9 +44,8 @@ export function MediaCard({ media, onClick, showRating = true, variant = 'poster
 
         {/* Rating badge */}
         {showRating && media.vote_average > 0 && (
-          <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm rounded-full px-2 py-0.5 flex items-center gap-1">
-            <Star className="w-3 h-3 fill-yellow-500 text-yellow-500" />
-            <span className="text-xs text-white font-semibold">
+          <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm px-[4px] py-[2px] leading-[1em] rounded-[3px]">
+            <span className="text-xs text-white font-normal">
               {media.vote_average.toFixed(1)}
             </span>
           </div>
