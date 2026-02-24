@@ -38,7 +38,7 @@ export function MediaRow({ title, mediaList, loading = false, onMediaClick }: Me
   };
 
   return (
-    <div className="relative group">
+    <div className="relative">
       <h2 className="text-xl font-semibold mb-4">{title}</h2>
 
       {/* Scroll buttons */}
@@ -46,7 +46,7 @@ export function MediaRow({ title, mediaList, loading = false, onMediaClick }: Me
         <Button
           variant="ghost"
           size="icon"
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 rounded-full"
           onClick={() => scroll('left')}
         >
           <ChevronLeft className="w-6 h-6" />
@@ -57,7 +57,7 @@ export function MediaRow({ title, mediaList, loading = false, onMediaClick }: Me
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 rounded-full"
           onClick={() => scroll('right')}
         >
           <ChevronRight className="w-6 h-6" />

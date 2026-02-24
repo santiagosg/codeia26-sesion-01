@@ -20,25 +20,27 @@ export function MediaCard({ media, onClick, showRating = true, variant = 'poster
   return (
     <div
       onClick={onClick}
-      className="group relative overflow-hidden rounded-lg cursor-pointer transition-all duration-200 hover:scale-105 hover:z-10 hover:shadow-2xl"
+      className="group relative rounded-lg cursor-pointer transition-all duration-200 hover:z-10"
     >
-      <div className={`relative ${variant === 'poster' ? 'aspect-[2/3]' : 'aspect-video'} bg-muted`}>
-        {imageUrl ? (
-          <img
-            src={imageUrl}
-            alt={title}
-            loading="lazy"
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="flex items-center justify-center w-full h-full bg-muted">
-            <span className="text-muted-foreground text-sm">No imagen</span>
-          </div>
-        )}
+      <div className={`relative ${variant === 'poster' ? 'aspect-[2/3]' : 'aspect-video'} bg-muted overflow-hidden rounded-lg`}>
+        <div className="relative w-full h-full">
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={title}
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+            />
+          ) : (
+            <div className="flex items-center justify-center w-full h-full">
+              <span className="text-muted-foreground text-sm">No imagen</span>
+            </div>
+          )}
 
-        {/* Overlay on hover */}
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-          <Play className="w-12 h-12 text-white" />
+          {/* Overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[300ms] ease-in-out flex items-center justify-center">
+            <Play className="w-12 h-12 text-white transition-all duration-[300ms] ease-in-out scale-0 group-hover:scale-100 opacity-0 group-hover:opacity-100" />
+          </div>
         </div>
 
         {/* Rating badge */}
@@ -53,7 +55,7 @@ export function MediaCard({ media, onClick, showRating = true, variant = 'poster
 
       {/* Title */}
       <div className="mt-2">
-        <p className="text-sm font-medium truncate" title={title}>{title}</p>
+        <p className="text-sm font-medium truncate group-hover:text-netflix-red transition-colors duration-300 ease-in-out" title={title}>{title}</p>
         {year && <p className="text-xs text-muted-foreground">{year}</p>}
       </div>
     </div>
