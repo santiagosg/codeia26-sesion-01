@@ -45,7 +45,7 @@ export function HomePage() {
   }, []);
 
   const handleMediaClick = (media: Movie | TVShow | SearchResult) => {
-    const mediaType = 'title' in media ? 'movie' : 'tv';
+    const mediaType = 'title' in media ? 'movies' : 'tv';
     navigate(`/${mediaType}/${media.id}`);
   };
 

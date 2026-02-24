@@ -232,7 +232,7 @@ export function MovieDetailPage() {
               <MediaCard
                 key={similarMovie.id}
                 media={similarMovie}
-                onClick={() => navigate(`/movie/${similarMovie.id}`)}
+                onClick={() => navigate(`/movies/${similarMovie.id}`)}
               />
             ))}
           </div>
