@@ -5,7 +5,7 @@ import { movieService, getImageUrl, getBackdropUrl, getProfileUrl } from '@/serv
 import type { MovieDetails } from '@/types';
 import { Navbar } from '@/components/layout/Navbar';
 import { MediaCard, MediaCardSkeleton } from '@/components/media/MediaCard';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -168,6 +168,8 @@ export function MovieDetailPage() {
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="max-w-4xl p-0">
+                      <DialogTitle className="sr-only">Trailer: {trailer?.name}</DialogTitle>
+                      <DialogDescription className="sr-only">Trailer de {movie?.title}</DialogDescription>
                       <div className="aspect-video bg-black">
                         <iframe
                           src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1`}
