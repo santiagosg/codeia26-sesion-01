@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { MediaCard, MediaCardSkeleton } from './MediaCard';
 import type { Movie, TVShow, MediaSearchResult } from '@/types';
@@ -37,6 +37,11 @@ export function MediaRow({ title, mediaList, loading = false, onMediaClick }: Me
     }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(checkScroll, 100);
+    return () => clearTimeout(timer);
+  }, [mediaList, loading]);
+
   return (
     <div className="relative">
       <h2 className="text-xl font-semibold mb-4">{title}</h2>
@@ -46,7 +51,7 @@ export function MediaRow({ title, mediaList, loading = false, onMediaClick }: Me
         <Button
           variant="ghost"
           size="icon"
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 rounded-full"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 rounded-full"
           onClick={() => scroll('left')}
         >
           <ChevronLeft className="w-6 h-6" />
@@ -57,7 +62,7 @@ export function MediaRow({ title, mediaList, loading = false, onMediaClick }: Me
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 rounded-full"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 rounded-full"
           onClick={() => scroll('right')}
         >
           <ChevronRight className="w-6 h-6" />

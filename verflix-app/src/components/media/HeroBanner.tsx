@@ -63,14 +63,7 @@ export function HeroBanner({ media, loading = false, onPlay, onMoreInfo }: HeroB
           </p>
 
           <div className="flex gap-3 pt-4">
-            <Button
-              size="lg"
-              className="bg-white text-black hover:bg-white/90"
-              onClick={onPlay}
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Reproducir
-            </Button>
+
             <Button
               size="lg"
               variant="outline"
