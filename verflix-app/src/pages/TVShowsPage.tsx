@@ -45,7 +45,7 @@ export function TVShowsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       <Navbar />
 
       <div className="pt-24 px-6 md:px-12 lg:px-24">

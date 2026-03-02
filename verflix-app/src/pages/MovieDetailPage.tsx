@@ -53,7 +53,7 @@ export function MovieDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="bg-background">
         <Navbar />
         <div className="pt-16">
           <Skeleton className="w-full h-[60vh] md:h-[70vh]" />
@@ -75,14 +75,14 @@ export function MovieDetailPage() {
 
   if (!movie) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="bg-background flex items-center justify-center min-h-[calc(100vh-4rem)]">
         <p>Película no encontrada</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       <Navbar />
 
       {/* Hero Section */}

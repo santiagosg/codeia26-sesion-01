@@ -7,20 +7,24 @@ import { TVShowsPage } from '@/pages/TVShowsPage';
 import { SearchPage } from '@/pages/SearchPage';
 import { MovieDetailPage } from '@/pages/MovieDetailPage';
 import { TVDetailPage } from '@/pages/TVDetailPage';
+import { Footer } from '@/components/layout/Footer';
 
 function App() {
   return (
     <ThemeProvider>
       <AppProvider>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/movies" element={<MoviesPage />} />
-            <Route path="/movies/:id" element={<MovieDetailPage />} />
-            <Route path="/tv" element={<TVShowsPage />} />
-            <Route path="/tv/:id" element={<TVDetailPage />} />
-            <Route path="/search" element={<SearchPage />} />
-          </Routes>
+          <div className="min-h-screen flex flex-col bg-background">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/movies" element={<MoviesPage />} />
+              <Route path="/movies/:id" element={<MovieDetailPage />} />
+              <Route path="/tv" element={<TVShowsPage />} />
+              <Route path="/tv/:id" element={<TVDetailPage />} />
+              <Route path="/search" element={<SearchPage />} />
+            </Routes>
+            <Footer />
+          </div>
         </BrowserRouter>
       </AppProvider>
     </ThemeProvider>

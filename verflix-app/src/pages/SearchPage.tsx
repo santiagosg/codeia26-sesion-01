@@ -91,7 +91,7 @@ export function SearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       <Navbar />
 
       <div className="pt-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">

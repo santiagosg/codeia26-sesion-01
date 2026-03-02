@@ -51,7 +51,7 @@ export function HomePage() {
 
   if (configLoading || loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="bg-background">
         <Navbar />
         <div className="pt-16">
           <HeroBanner loading />
@@ -62,7 +62,7 @@ export function HomePage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="bg-background flex items-center justify-center min-h-[calc(100vh-4rem)]">
         <div className="text-center space-y-4">
           <h2 className="text-2xl font-semibold text-destructive">{error}</h2>
           <button
@@ -79,7 +79,7 @@ export function HomePage() {
   const featuredMedia = trending[0] as MediaSearchResult | undefined;
 
   return (
-    <div className="min-h-screen bg-background pb-12">
+    <div className="bg-background pb-12">
       <Navbar />
 
       <div className="pt-16">
