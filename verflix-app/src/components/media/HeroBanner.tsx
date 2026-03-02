@@ -1,4 +1,4 @@
-import { Play, Info, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Info, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getBackdropUrl } from '@/services';
 import type { Movie, TVShow } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -8,14 +8,12 @@ import { useState, useEffect } from 'react';
 interface HeroBannerProps {
   mediaList?: (Movie | TVShow)[];
   loading?: boolean;
-  onPlay?: (media: Movie | TVShow) => void;
   onMoreInfo?: (media: Movie | TVShow) => void;
 }
 
 export function HeroBanner({
   mediaList = [],
   loading = false,
-  onPlay,
   onMoreInfo,
 }: HeroBannerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
