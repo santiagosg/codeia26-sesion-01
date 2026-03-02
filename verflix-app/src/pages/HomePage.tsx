@@ -76,28 +76,27 @@ export function HomePage() {
     );
   }
 
-  const featuredMedia = trending[0] as MediaSearchResult | undefined;
+  const featuredMedia = trending.slice(0, 6) as MediaSearchResult[];
 
   return (
     <div className="bg-background pb-12">
       <Navbar />
 
       <div className="pt-16">
-        {/* Hero Banner */}
-        {featuredMedia && (
+        {/* Hero Banner Carousel */}
+        {featuredMedia.length > 0 && (
           <HeroBanner
-            media={featuredMedia}
-            onPlay={() => handleMediaClick(featuredMedia)}
-            onMoreInfo={() => handleMediaClick(featuredMedia)}
+            mediaList={featuredMedia}
+            onMoreInfo={handleMediaClick}
           />
         )}
 
         {/* Content Rows */}
         <div className="space-y-8 px-6 md:px-12 lg:px-24 -mt-16 relative z-10">
-          {trending.slice(1).length > 0 && (
+          {trending.slice(6).length > 0 && (
             <MediaRow
               title="Tendencias"
-              mediaList={trending.slice(1) as MediaSearchResult[]}
+              mediaList={trending.slice(6) as MediaSearchResult[]}
               onMediaClick={handleMediaClick}
             />
           )}
