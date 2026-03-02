@@ -32,8 +32,8 @@ export function MediaCard({ media, onClick, showRating = true, variant = 'poster
               className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
             />
           ) : (
-            <div className="flex items-center justify-center w-full h-full">
-              <span className="text-muted-foreground text-sm">No imagen</span>
+            <div className="w-full h-full flex items-center justify-center bg-muted rounded-lg">
+              <span className="text-muted-foreground">No imagen</span>
             </div>
           )}
 

@@ -10,6 +10,8 @@ Documentación completa de componentes, estilos y sistema de diseño de la aplic
 - [Wireframes](#wireframes)
 - [Skeleton Patterns](#skeleton-patterns)
 - [Search UX](#search-ux)
+- [Cast & Person UX](#cast--person-ux)
+- [No Image Card UX](#no-image-card-ux)
 - [Sistema de Colores](#sistema-de-colores)
 - [Temas](#temas)
 - [Tipografía](#tipografía)
@@ -254,6 +256,28 @@ npx shadcn-ui@latest init
   - Año de lanzamiento
   - Skeleton de carga
 
+#### CastCard
+- **Ubicación:** `src/components/media/CastCard.tsx`
+- **Props:**
+  - `person: Person` - Datos del actor/actriz
+  - `onClick?: () => void` - Callback al hacer click
+- **Características:**
+  - Foto cuadrada del actor
+  - **Hover**: Nombre en rojo (#E50914), degradado, flecha visible
+  - Personaje en gris pequeño
+  - Skeleton de carga
+
+#### CreditCard
+- **Ubicación:** `src/components/media/CreditCard.tsx`
+- **Props:**
+  - `credit: Credit` - Datos del trabajo en filmografía
+  - `onClick?: () => void` - Callback al hacer click
+- **Características:**
+  - Poster del contenido
+  - **Hover**: Nombre de personaje, degradado, título en rojo
+  - Rating badge
+  - Indicador de tipo (película/serie)
+
 #### MediaRow
 - **Ubicación:** `src/components/media/MediaRow.tsx`
 - **Props:**
@@ -362,6 +386,19 @@ npx shadcn-ui@latest init
   - Reproductor de YouTube embed
   - **Dropdown moderno** para selección de trailers
   - Lista de videos disponibles
+
+#### PersonDetailPage
+- **Ubicación:** `src/pages/PersonDetailPage.tsx`
+- **Props:**
+  - `id: string` - ID del actor/actriz (de useParams)
+- **Características:**
+  - Hero section con foto grande y nombre
+  - Información personal (fecha de nacimiento, lugar, etc.)
+  - Biografía completa con "Ver más/menos"
+  - Filmografía con filtros (Todos/Películas/Series)
+  - Grid de trabajos con CreditCard
+  - "Conocido por" (Top Works)
+  - Skeleton de carga completo
 
 ---
 
@@ -488,6 +525,25 @@ Este archivo incluye:
 ```bash
 # Ver experiencia de búsqueda completa
 cat DOCS/search_ux.md
+```
+
+---
+
+## Cast & Person UX
+
+> 👥 Cards de elenco y página de actor/actriz con efectos hover estilo Netflix.
+
+Este archivo incluye:
+- **CastCard** - Card de actor con hover (nombre en rojo, degradado, flecha)
+- **PersonDetailPage** - Página individual de actor/actriz con filmografía
+- **CreditCard** - Card de trabajo en filmografía con interacción
+- **Tokens y Estilos** - Colores, tipografía, animaciones específicas
+- **Accesibilidad** - Keyboard navigation, ARIA labels, contrast requirements
+- **Referencias de Implementación** - Rutas, servicios TMDB, interfaces TypeScript
+
+```bash
+# Ver diseño completo de CastCard y PersonDetailPage
+cat DOCS/cast_person_ux.md
 ```
 
 ---

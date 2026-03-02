@@ -114,18 +114,74 @@ export interface Person {
   id: number;
   adult: boolean;
   also_known_as: string[];
-  biography: string;
-  birthday: string;
+  biography: string | null;
+  birthday: string | null;
   deathday: string | null;
-  gender: number; // 1 = female, 2 = male
+  gender: number; // 0 = unknown, 1 = female, 2 = male, 3 = non-binary
   homepage: string | null;
   imdb_id: string;
   known_for_department: string;
-  known_for: string;
+  known_for: string | Array<Movie | TVShow>;
   name: string;
-  place_of_birth: string;
+  place_of_birth: string | null;
   profile_path: string | null;
   popularity: number;
+}
+
+export interface PersonDetails extends Person {
+  external_ids: ExternalIds;
+  images: PersonImages;
+  known_for: Array<Movie | TVShow>;
+  movie_credits: PersonMovieCredits;
+  tv_credits: PersonTVCredits;
+}
+
+export interface ExternalIds {
+  imdb_id: string | null;
+  wikidata_id: string | null;
+  facebook_id: string | null;
+  instagram_id: string | null;
+  twitter_id: string | null;
+  tiktok_id: string | null;
+  youtube_id: string | null;
+}
+
+export interface PersonImages {
+  profiles: ProfileImage[];
+}
+
+export interface ProfileImage {
+  aspect_ratio: number;
+  file_path: string;
+  height: number;
+  iso_639_1: string | null;
+  vote_average: number;
+  vote_count: number;
+  width: number;
+}
+
+export interface Credit {
+  id: number;
+  title?: string;
+  name?: string;
+  poster_path: string | null;
+  character?: string;
+  release_date?: string;
+  first_air_date?: string;
+  vote_average: number;
+  media_type: 'movie' | 'tv';
+  credit_id: string;
+  order?: number;
+}
+
+export interface PersonMovieCredits {
+  cast: Credit[];
+  crew: Crew[];
+}
+
+export interface PersonTVCredits {
+  cast: Credit[];
+  crew: Crew[];
 }
 
 export interface Cast extends Person {

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Play, Star, Calendar, Heart, Share, User, Tv } from 'lucide-react';
-import { tvService, getImageUrl, getBackdropUrl, getProfileUrl } from '@/services';
+import { Play, Star, Calendar, Heart, Share, Tv } from 'lucide-react';
+import { tvService, getImageUrl, getBackdropUrl } from '@/services';
 import type { TVShowDetails } from '@/types';
 import { Navbar } from '@/components/layout/Navbar';
 import { MediaCard, MediaCardSkeleton } from '@/components/media/MediaCard';
+import { CastCard } from '@/components/media/CastCard';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -224,25 +225,13 @@ export function TVDetailPage() {
       {show.credits?.cast && show.credits.cast.length > 0 && (
         <div className="px-6 md:px-12 lg:px-24 py-12">
           <h2 className="text-2xl font-bold mb-6">Elenco</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {show.credits.cast.slice(0, 12).map((person) => (
-              <div key={person.id} className="text-center">
-                <div className="aspect-[2/3] rounded-lg overflow-hidden mb-2 bg-muted">
-                  {person.profile_path ? (
-                    <img
-                      src={getProfileUrl(person.profile_path, 'w185')}
-                      alt={person.name}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-muted flex items-center justify-center">
-                      <User className="w-12 h-12 text-muted-foreground" />
-                    </div>
-                  )}
-                </div>
-                <p className="font-medium text-sm">{person.name}</p>
-                <p className="text-xs text-muted-foreground">{person.character}</p>
-              </div>
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+            {show.credits.cast.slice(0, 16).map((person) => (
+              <CastCard
+                key={person.id}
+                person={person}
+                onClick={() => navigate(`/person/${person.id}`)}
+              />
             ))}
           </div>
         </div>
