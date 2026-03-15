@@ -2,6 +2,8 @@
 
 Una aplicación tipo Netflix que consume la API de TMDB (The Movie Database).
 
+**[Demo Online](https://verflix-now.vercel.app)**
+
 ![Vite](https://img.shields.io/badge/Vite-5.0.8-646CFF?logo=vite&logoColor=white)
 ![React](https://img.shields.io/badge/React-19.2.4-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.2.2-3178C6?logo=typescript&logoColor=white)
