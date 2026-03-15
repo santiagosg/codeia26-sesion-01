@@ -4,7 +4,8 @@ import type { Genre } from '@/types';
 
 interface AppContextType {
   imageBaseUrl: string;
-  genres: Genre[];
+  movieGenres: Genre[];
+  tvGenres: Genre[];
   loading: boolean;
 }
 
@@ -14,15 +15,20 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [imageBaseUrl] = useState<string>(
     import.meta.env.VITE_TMDB_IMAGE_BASE_URL || 'https://image.tmdb.org/t/p'
   );
-  const [genres, setGenres] = useState<Genre[]>([]);
+  const [movieGenres, setMovieGenres] = useState<Genre[]>([]);
+  const [tvGenres, setTVGenres] = useState<Genre[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadConfig = async () => {
       try {
-        // Load genres
-        const movieGenres = await configService.getMovieGenres();
-        setGenres(movieGenres.genres);
+        // Load both movie and TV genres
+        const [movieGenresData, tvGenresData] = await Promise.all([
+          configService.getMovieGenres(),
+          configService.getTVGenres(),
+        ]);
+        setMovieGenres(movieGenresData.genres);
+        setTVGenres(tvGenresData.genres);
       } catch (error) {
         console.error('Failed to load app config:', error);
       } finally {
@@ -34,7 +40,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <AppContext.Provider value={{ imageBaseUrl, genres, loading }}>
+    <AppContext.Provider value={{ imageBaseUrl, movieGenres, tvGenres, loading }}>
       {children}
     </AppContext.Provider>
   );
