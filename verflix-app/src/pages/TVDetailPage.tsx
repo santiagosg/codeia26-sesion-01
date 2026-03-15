@@ -81,7 +81,7 @@ export function TVDetailPage() {
 
   return (
     <div className="bg-background">
-      <Navbar />
+      <Navbar forceSolidBackground />
 
       {/* Hero Section */}
       <div className="relative">

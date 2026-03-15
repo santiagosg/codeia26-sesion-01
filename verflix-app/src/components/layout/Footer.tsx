@@ -35,23 +35,15 @@ export function Footer() {
     { label: 'Terror', href: '/movies?genre=27' },
   ];
 
-  const legalLinks: FooterLink[] = [
-    { label: 'Aviso legal', href: '/legal/aviso', rel: 'nofollow' },
-    { label: 'Política de privacidad', href: '/legal/privacidad', rel: 'nofollow' },
-    { label: 'Política de cookies', href: '/legal/cookies', rel: 'nofollow' },
-    { label: 'Términos y condiciones', href: '/legal/terminos', rel: 'nofollow' },
-    { label: 'Contacto', href: '/legal/contacto', rel: 'nofollow' },
-  ];
-
   return (
     <footer
       role="contentinfo"
       aria-label="Pie de página"
       className="mt-12 border-t border-border bg-background/95 backdrop-blur-sm"
     >
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:py-12">
+      <div className="mx-auto max-w-7xl px-6 py-8 sm:px-6 md:py-12">
         {/* Grid de columnas del footer */}
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-4">
           {/* Logo / Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link
@@ -84,9 +76,6 @@ export function Footer() {
 
           {/* Categorías */}
           <FooterColumn title="Categorías" links={categoryLinks} />
-
-          {/* Legal */}
-          <FooterColumn title="Legal" links={legalLinks} />
         </div>
 
         {/* Copyright */}

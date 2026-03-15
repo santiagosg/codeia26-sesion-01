@@ -93,11 +93,11 @@ export function HeroBanner({
               {index === currentIndex && (
                 <div className="relative h-full flex items-center px-6 md:px-12 lg:px-24">
                   <div className="max-w-2xl space-y-4 animate-in fade-in duration-500">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground drop-shadow-lg">
                       {title}
                     </h1>
 
-                    <div className="flex items-center gap-4 text-white">
+                    <div className="flex items-center gap-4 text-foreground">
                       {media.vote_average > 0 && (
                         <div className="flex items-center gap-1">
                           <Star className="w-5 h-5 fill-yellow-500 text-yellow-500" />
@@ -107,15 +107,14 @@ export function HeroBanner({
                       {year && <span className="text-sm">{year}</span>}
                     </div>
 
-                    <p className="text-base md:text-lg text-white/90 line-clamp-3 max-w-xl">
+                    <p className="text-base md:text-lg text-foreground/90 line-clamp-3 max-w-xl">
                       {media.overview}
                     </p>
 
                     <div className="flex gap-3 pt-4">
                       <Button
                         size="lg"
-                        variant="outline"
-                        className="bg-black/20 border-white/30 text-white hover:bg-white/20"
+                        className="bg-primary text-primary-foreground hover:bg-primary/90"
                         onClick={() => onMoreInfo?.(media)}
                       >
                         <Info className="w-5 h-5 mr-2" />
@@ -135,7 +134,7 @@ export function HeroBanner({
         <Button
           variant="ghost"
           size="icon"
-          className="bg-black/30 hover:bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+          className="bg-background/80 hover:bg-background/90 text-foreground border border-border opacity-0 group-hover:opacity-100 transition-opacity"
           onClick={goToPrevious}
         >
           <ChevronLeft className="w-8 h-8" />
@@ -145,7 +144,7 @@ export function HeroBanner({
         <Button
           variant="ghost"
           size="icon"
-          className="bg-black/30 hover:bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+          className="bg-background/80 hover:bg-background/90 text-foreground border border-border opacity-0 group-hover:opacity-100 transition-opacity"
           onClick={goToNext}
         >
           <ChevronRight className="w-8 h-8" />
@@ -159,8 +158,8 @@ export function HeroBanner({
             key={index}
             className={`w-2 h-2 rounded-full transition-all ${
               index === currentIndex
-                ? 'bg-white w-8'
-                : 'bg-white/50 hover:bg-white/80'
+                ? 'bg-foreground w-8'
+                : 'bg-foreground/50 hover:bg-foreground/80'
             }`}
             onClick={() => goToSlide(index)}
             aria-label={`Go to slide ${index + 1}`}

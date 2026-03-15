@@ -38,10 +38,10 @@ export function CreditCard({ credit, onClick }: CreditCardProps) {
 
         {/* Overlay con nombre de personaje al hacer hover - solo cuando hay imagen */}
         {hasImage && (
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex items-end p-3">
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex items-end p-3">
             <div className="w-full">
               {credit.character && (
-                <p className="text-white text-sm font-medium truncate">
+                <p className="text-primary-foreground text-sm font-medium truncate">
                   {credit.character}
                 </p>
               )}
@@ -54,8 +54,8 @@ export function CreditCard({ credit, onClick }: CreditCardProps) {
 
         {/* Rating badge - solo cuando hay imagen */}
         {hasImage && credit.vote_average && credit.vote_average > 0 && (
-          <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm px-[4px] py-[2px] leading-[1em] rounded-[3px]">
-            <span className="text-xs text-white font-normal">
+          <div className="absolute top-2 right-2 bg-foreground/60 backdrop-blur-sm px-[4px] py-[2px] leading-[1em] rounded-[3px]">
+            <span className="text-xs text-primary-foreground font-normal">
               {credit.vote_average.toFixed(1)}
             </span>
           </div>

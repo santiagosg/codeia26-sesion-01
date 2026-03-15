@@ -51,7 +51,7 @@ export function MediaRow({ title, mediaList, loading = false, onMediaClick }: Me
         <Button
           variant="ghost"
           size="icon"
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 rounded-full"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-50 bg-background/80 hover:bg-background/90 border border-border rounded-full"
           onClick={() => scroll('left')}
         >
           <ChevronLeft className="w-6 h-6" />
@@ -62,7 +62,7 @@ export function MediaRow({ title, mediaList, loading = false, onMediaClick }: Me
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 rounded-full"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-50 bg-background/80 hover:bg-background/90 border border-border rounded-full"
           onClick={() => scroll('right')}
         >
           <ChevronRight className="w-6 h-6" />

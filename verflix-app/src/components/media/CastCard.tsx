@@ -29,14 +29,14 @@ export function CastCard({ person, onClick }: CastCardProps) {
         )}
 
         {/* Overlay con degradado al hacer hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex items-end justify-between p-3">
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex items-end justify-between p-3">
           {/* Nombre en rojo */}
-          <span className="text-white font-medium text-sm truncate">
+          <span className="text-primary-foreground font-medium text-sm truncate">
             {person.name}
           </span>
 
           {/* Flecha a la derecha */}
-          <ArrowRight className="w-5 h-5 text-white transition-transform duration-300 ease-in-out translate-x-[-20px] group-hover:translate-x-0" />
+          <ArrowRight className="w-5 h-5 text-primary-foreground transition-transform duration-300 ease-in-out translate-x-[-20px] group-hover:translate-x-0" />
         </div>
       </div>
 

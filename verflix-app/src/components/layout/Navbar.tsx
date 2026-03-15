@@ -18,7 +18,11 @@ function useDebounce<T extends (...args: any[]) => any>(
   }, [callback, delay]) as T;
 }
 
-export function Navbar() {
+interface NavbarProps {
+  forceSolidBackground?: boolean;
+}
+
+export function Navbar({ forceSolidBackground = false }: NavbarProps) {
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
@@ -95,10 +99,10 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-black/95 backdrop-blur-sm shadow-lg'
-          : 'bg-gradient-to-b from-black/80 to-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+        forceSolidBackground || isScrolled
+          ? 'bg-background/95 backdrop-blur-sm shadow-lg'
+          : 'bg-gradient-to-b from-background/80 to-transparent'
       }`}
     >
       <div className="px-6 md:px-12 lg:px-24">
@@ -121,7 +125,7 @@ export function Navbar() {
               <Link
                 to="/"
                 className={`text-sm font-medium transition-colors hover:text-netflix-red ${
-                  location.pathname === '/' ? 'text-white' : 'text-gray-300'
+                  location.pathname === '/' ? 'text-foreground font-semibold' : 'text-muted-foreground'
                 }`}
               >
                 Inicio
@@ -129,7 +133,7 @@ export function Navbar() {
               <Link
                 to="/movies"
                 className={`text-sm font-medium transition-colors hover:text-netflix-red flex items-center gap-1 ${
-                  location.pathname.startsWith('/movies') ? 'text-white' : 'text-gray-300'
+                  location.pathname.startsWith('/movies') ? 'text-foreground font-semibold' : 'text-muted-foreground'
                 }`}
               >
                 <Film className="w-4 h-4" />
@@ -138,7 +142,7 @@ export function Navbar() {
               <Link
                 to="/tv"
                 className={`text-sm font-medium transition-colors hover:text-netflix-red flex items-center gap-1 ${
-                  location.pathname.startsWith('/tv') ? 'text-white' : 'text-gray-300'
+                  location.pathname.startsWith('/tv') ? 'text-foreground font-semibold' : 'text-muted-foreground'
                 }`}
               >
                 <Tv className="w-4 h-4" />
@@ -151,7 +155,7 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             <div className="relative" ref={dropdownRef}>
               <form onSubmit={handleSearch} className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   type="search"
                   placeholder="Buscar..."
@@ -161,13 +165,13 @@ export function Navbar() {
                     debouncedSearch(e.target.value);
                   }}
                   onFocus={() => searchResults.length > 0 && setIsDropdownOpen(true)}
-                  className="pl-10 w-40 md:w-64 bg-black/20 border-white/20 text-white placeholder:text-gray-400 focus:border-netflix-red"
+                  className="pl-10 w-40 md:w-64 bg-muted/50 border-border text-foreground placeholder:text-muted-foreground focus:border-ring"
                 />
               </form>
 
               {/* Dropdown de resultados */}
               {isDropdownOpen && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-netflix-black/95 backdrop-blur-sm border border-white/10 rounded-lg shadow-2xl z-[100] overflow-hidden">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-background/95 backdrop-blur-sm border border-border rounded-lg shadow-2xl z-[100] overflow-hidden">
                   {isSearching ? (
                     <div className="p-4 flex items-center justify-center">
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-netflix-red"></div>
@@ -189,10 +193,10 @@ export function Navbar() {
                               setIsDropdownOpen(false);
                               setSearchQuery('');
                             }}
-                            className="w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition-colors duration-200 border-b border-white/5 last:border-0 group"
+                            className="w-full px-4 py-3 flex items-center gap-3 hover:bg-accent transition-colors duration-200 border-b border-border last:border-0 group"
                           >
                             {/* Imagen miniatura */}
-                            <div className="w-12 h-18 flex-shrink-0 rounded overflow-hidden bg-netflix-gray">
+                            <div className="w-12 h-18 flex-shrink-0 rounded overflow-hidden bg-muted">
                               {imageUrl ? (
                                 <img
                                   src={imageUrl}
@@ -214,7 +218,7 @@ export function Navbar() {
                                 ) : (
                                   <Tv className="w-3 h-3 text-netflix-red flex-shrink-0" />
                                 )}
-                                <p className="text-sm font-medium text-white truncate group-hover:text-netflix-red transition-colors">
+                                <p className="text-sm font-medium text-foreground truncate group-hover:text-netflix-red transition-colors">
                                   {title}
                                 </p>
                               </div>
@@ -228,7 +232,7 @@ export function Navbar() {
                                 )}
                               </div>
                               {result.overview && (
-                                <p className="text-xs text-gray-400 mt-1 line-clamp-1">
+                                <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
                                   {result.overview}
                                 </p>
                               )}
@@ -244,7 +248,7 @@ export function Navbar() {
                             navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
                             setIsDropdownOpen(false);
                           }}
-                          className="w-full px-4 py-3 text-sm font-medium text-netflix-red hover:bg-white/10 transition-colors duration-200 border-t border-white/10"
+                          className="w-full px-4 py-3 text-sm font-medium text-netflix-red hover:bg-accent transition-colors duration-200 border-t border-border"
                         >
                           Ver todos los resultados ({totalResults})
                         </button>
@@ -263,7 +267,7 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="text-white hover:text-netflix-red"
+              className="text-foreground hover:text-netflix-red"
               aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
             >
               {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}

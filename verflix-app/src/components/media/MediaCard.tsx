@@ -38,15 +38,15 @@ export function MediaCard({ media, onClick, showRating = true, variant = 'poster
           )}
 
           {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[300ms] ease-in-out flex items-center justify-center">
-            <Play className="w-12 h-12 text-white transition-all duration-[300ms] ease-in-out scale-0 group-hover:scale-100 opacity-0 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[300ms] ease-in-out flex items-center justify-center">
+            <Play className="w-12 h-12 text-primary-foreground transition-all duration-[300ms] ease-in-out scale-0 group-hover:scale-100 opacity-0 group-hover:opacity-100" />
           </div>
         </div>
 
         {/* Rating badge */}
         {showRating && media.vote_average > 0 && (
-          <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm px-[4px] py-[2px] leading-[1em] rounded-[3px]">
-            <span className="text-xs text-white font-normal">
+          <div className="absolute top-2 right-2 bg-foreground/60 backdrop-blur-sm px-[4px] py-[2px] leading-[1em] rounded-[3px]">
+            <span className="text-xs text-primary-foreground font-normal">
               {media.vote_average.toFixed(1)}
             </span>
           </div>
@@ -55,7 +55,7 @@ export function MediaCard({ media, onClick, showRating = true, variant = 'poster
 
       {/* Title */}
       <div className="mt-2">
-        <p className="text-sm font-medium truncate group-hover:text-netflix-red transition-colors duration-300 ease-in-out" title={title}>{title}</p>
+        <p className="text-sm font-medium text-foreground truncate group-hover:text-netflix-red transition-colors duration-300 ease-in-out" title={title}>{title}</p>
         {year && <p className="text-xs text-muted-foreground">{year}</p>}
       </div>
     </div>

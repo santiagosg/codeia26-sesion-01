@@ -149,7 +149,7 @@ export function PersonDetailPage() {
 
   return (
     <div className="bg-background">
-      <Navbar />
+      <Navbar forceSolidBackground />
 
       {/* Hero Section */}
       <div className="px-6 md:px-12 lg:px-24 pt-20 pb-12">

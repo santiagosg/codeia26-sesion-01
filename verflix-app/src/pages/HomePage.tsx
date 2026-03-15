@@ -92,7 +92,7 @@ export function HomePage() {
         )}
 
         {/* Content Rows */}
-        <div className="space-y-8 px-6 md:px-12 lg:px-24 -mt-16 relative z-10">
+        <div className="space-y-8 px-6 md:px-12 lg:px-24 md:-mt-16 relative z-10">
           {trending.slice(6).length > 0 && (
             <MediaRow
               title="Tendencias"
