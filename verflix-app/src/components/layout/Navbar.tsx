@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Search, Moon, Sun, Film, Tv } from 'lucide-react';
+import { Search, Moon, Sun, Film, Tv, Menu } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { MobileMenu } from '@/components/layout/MobileMenu';
 import { searchService, getImageUrl } from '@/services';
 import type { MediaSearchResult } from '@/types';
 
@@ -28,6 +30,7 @@ export function Navbar({ forceSolidBackground = false }: NavbarProps) {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Estados para búsqueda dinámica
   const [searchResults, setSearchResults] = useState<MediaSearchResult[]>([]);
@@ -121,6 +124,32 @@ export function Navbar({ forceSolidBackground = false }: NavbarProps) {
               Verflix
             </Link>
 
+            {/* Mobile Menu - visible solo en < md */}
+            <div className="md:hidden">
+              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-foreground hover:text-netflix-red"
+                    aria-label="Abrir menú de navegación"
+                    aria-expanded={isMobileMenuOpen}
+                  >
+                    <Menu className="h-6 w-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent className="w-[280px] sm:w-[320px]">
+                  <div className="flex flex-col gap-6 mt-8">
+                    <div>
+                      <h2 className="text-lg font-semibold mb-4">Navegación</h2>
+                      <MobileMenu onClose={() => setIsMobileMenuOpen(false)} />
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+
+            {/* Desktop Menu - visible solo en >= md */}
             <div className="hidden md:flex items-center gap-6">
               <Link
                 to="/"
